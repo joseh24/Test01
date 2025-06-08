@@ -2,7 +2,6 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -48,8 +47,7 @@ public class LoginPage {
     }
 
     public String getLoginErrorMesage(){
-        String errorMessage = driver.findElement(loginErrorMesage).getText();
-        return errorMessage;
+        return driver.findElement(loginErrorMesage).getText();
     }
     public boolean isInvertoryListDisplayed(){
        return driver.findElement(inventoryList).isDisplayed();
@@ -65,14 +63,13 @@ public class LoginPage {
 
         List<String> productNames = cartItems.stream()
                 .map(WebElement::getText)
-                .collect(Collectors.toList());
+                .toList();
 
         Assert.assertTrue(productNames.contains(product1));
         Assert.assertTrue(productNames.contains(product2));
     }
     public void clickOnCheckoutButton() {
         WebElement button = driver.findElement(checkoutButton);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", button);
         button.click();
     }
 
@@ -83,7 +80,6 @@ public class LoginPage {
 
     public void click(String fieldName){
         WebElement field= driver.findElement(fieldLocators.get(fieldName));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", field);
         field.click();
     }
 
